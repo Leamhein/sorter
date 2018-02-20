@@ -20,13 +20,13 @@ class Sorter {
   }
 
   sort(indices) {
-    var tmp = this.arr.slice(0, indices.length);
-    function compare (indices) {
-      return indices[0] - indices[1];
-    };
-    tmp.sort(compare(indices));
-    for (let i = 0; i < tmp.length; i++) {
-      this.arr[i] = tmp[i];
+    var ind = indices.sort(function (a, b) {return a-b;}), //sort position number
+    tmp = this.arr.slice(ind[0], ind[ind.length-1]+1); //create new array which contain sorting elements
+    tmp.sort(function (a, b) {return a-b;}); // sort this array
+    var n = 0;
+    for (let i = 0; i < ind.length; i++) { //change elements into original array
+      this.arr[indices[i]] = tmp[n];
+      n++;
     };
     return this.arr;
   }
